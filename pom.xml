@@ -14,7 +14,7 @@
 	<name>DebtAccounterBot</name>
 	<description>Telegram Bot for chat users' debt counting</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
