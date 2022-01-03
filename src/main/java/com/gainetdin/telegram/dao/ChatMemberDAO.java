@@ -1,5 +1,7 @@
-package com.gainetdin.telegram.data;
+package com.gainetdin.telegram.dao;
 
+import com.gainetdin.telegram.data.ChatMember;
+import com.gainetdin.telegram.data.MessageData;
 import com.gainetdin.telegram.services.DebtCalculatingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

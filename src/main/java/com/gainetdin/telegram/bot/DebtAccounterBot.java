@@ -1,12 +1,13 @@
 package com.gainetdin.telegram.bot;
 
-import com.gainetdin.telegram.data.ChatMemberDAO;
+import com.gainetdin.telegram.dao.ChatMemberDAO;
 import com.gainetdin.telegram.data.MessageData;
 import com.gainetdin.telegram.services.MessageSendingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChatMemberCount;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -21,20 +22,22 @@ import java.util.List;
 public class DebtAccounterBot extends TelegramLongPollingBot {
     Logger log = LoggerFactory.getLogger(DebtAccounterBot.class);
 
-    @Value("${bot.name}")
-    private String botUsername;
+    BotCredentials botCredentials;
 
-    @Value("${bot.token}")
-    private String botToken;
+    @Autowired
+    public DebtAccounterBot(BotCredentials botCredentials) {
+        this.botCredentials = botCredentials;
+    }
+
 
     @Override
     public String getBotUsername() {
-        return botUsername;
+        return botCredentials.getName();
     }
 
     @Override
     public String getBotToken() {
-        return botToken;
+        return botCredentials.getToken();
     }
 
     @Override
