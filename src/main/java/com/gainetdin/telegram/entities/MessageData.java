@@ -1,14 +1,15 @@
-package com.gainetdin.telegram.data;
+package com.gainetdin.telegram.entities;
 
+import org.springframework.stereotype.Component;
 import java.util.List;
 
+@Component
 public class MessageData {
 
     private Long chatId;
     private String messageToBot;
     private String messageFromBot;
     private String userName;
-    private Integer chatMemberCount;
     private List<String> newUserNames;
 
     public Long getChatId() {
@@ -41,14 +42,6 @@ public class MessageData {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public Integer getChatMemberCount() {
-        return chatMemberCount;
-    }
-
-    public void setChatMemberCount(Integer chatMemberCount) {
-        this.chatMemberCount = chatMemberCount;
     }
 
     public List<String> getNewUserNames() {

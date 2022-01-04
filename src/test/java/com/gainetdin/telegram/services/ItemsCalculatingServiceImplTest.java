@@ -1,10 +1,10 @@
 package com.gainetdin.telegram.services;
 
-import com.gainetdin.telegram.data.MessageData;
+import com.gainetdin.telegram.entities.MessageData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DebtCalculatingServiceTest {
+class ItemsCalculatingServiceImplTest {
 
     private MessageData messageData;
 
@@ -25,6 +25,6 @@ class DebtCalculatingServiceTest {
 
     @Test
     void analyzeDataDebug() {
-        DebtCalculatingService.analyzeData(messageData);
+//        DebtCalculatingService.getSumOfItems();
     }
 }

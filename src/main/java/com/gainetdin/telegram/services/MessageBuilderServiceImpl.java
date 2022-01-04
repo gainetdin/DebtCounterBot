@@ -1,15 +1,17 @@
 package com.gainetdin.telegram.services;
 
-import com.gainetdin.telegram.data.MessageData;
+import com.gainetdin.telegram.entities.MessageData;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-public class MessageSendingService {
+@Service
+public class MessageBuilderServiceImpl implements MessageBuilderService {
 
-    public static SendMessage generateMessage(MessageData messageData) {
+    @Override
+    public SendMessage buildMessage(MessageData messageData) {
         return SendMessage.builder()
                 .chatId(messageData.getChatId().toString())
                 .text(messageData.getMessageFromBot())
                 .build();
     }
-
 }

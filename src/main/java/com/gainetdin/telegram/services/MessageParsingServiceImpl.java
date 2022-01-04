@@ -1,6 +1,9 @@
 package com.gainetdin.telegram.services;
 
-import com.gainetdin.telegram.data.MessageData;
+import com.gainetdin.telegram.entities.ItemsData;
+import com.gainetdin.telegram.entities.MessageData;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,26 +12,26 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DebtCalculatingService {
+@Service
+public class MessageParsingServiceImpl implements MessageParsingService {
 
-    public static BigDecimal analyzeData(MessageData messageData) {
+    ItemsData itemsData;
+
+    @Override
+    public ItemsData parseMessageToItems(MessageData messageData) {
         String message = messageData.getMessageToBot();
-
         String[] lines = getLinesFromMessage(message);
         Map<String, BigDecimal> items = getItemsFromLines(lines);
-
-        return getSumOfItems(items);
+        itemsData.setItems(items);
+        return itemsData;
     }
 
-    private static BigDecimal getSumOfItems(Map<String, BigDecimal> items) {
-        BigDecimal sum = new BigDecimal(0);
-        for (Map.Entry<String, BigDecimal> item : items.entrySet()) {
-            sum = sum.add(item.getValue());
-        }
-        return sum;
+    private String[] getLinesFromMessage(String message) {
+        String lineDelimiter = "[\\n\\r]+";
+        return message.split(lineDelimiter);
     }
 
-    private static Map<String, BigDecimal> getItemsFromLines(String[] lines) {
+    private Map<String, BigDecimal> getItemsFromLines(String[] lines) {
         Pattern anyDecimalNumber = Pattern.compile("-?\\d+([.,]\\d+)?");
         Map<String, BigDecimal> items = new HashMap<>();
         for (String line : lines) {
@@ -44,9 +47,8 @@ public class DebtCalculatingService {
         return items;
     }
 
-    private static String[] getLinesFromMessage(String message) {
-        String lineDelimiter = "[\\n\\r]+";
-        return message.split(lineDelimiter);
+    @Autowired
+    public MessageParsingServiceImpl(ItemsData itemsData) {
+        this.itemsData = itemsData;
     }
-
 }

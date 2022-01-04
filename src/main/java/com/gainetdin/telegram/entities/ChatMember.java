@@ -1,4 +1,4 @@
-package com.gainetdin.telegram.data;
+package com.gainetdin.telegram.entities;
 
 import java.math.BigDecimal;
 
@@ -19,6 +19,4 @@ public class ChatMember {
         this.userName = userName;
         balance = BigDecimal.ZERO;
     }
-
-
 }
