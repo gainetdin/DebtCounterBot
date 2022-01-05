@@ -2,7 +2,7 @@ package com.gainetdin.telegram.entities;
 
 import java.math.BigDecimal;
 
-public class ChatMember {
+public class ChatMemberEntity {
 
     private final String userName;
     private BigDecimal balance;
@@ -11,11 +11,15 @@ public class ChatMember {
         return balance;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public void changeBalance(BigDecimal balance) {
         this.balance = this.balance.subtract(balance);
     }
 
-    public ChatMember(String userName) {
+    public ChatMemberEntity(String userName) {
         this.userName = userName;
         balance = BigDecimal.ZERO;
     }

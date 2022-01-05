@@ -11,6 +11,7 @@ public class MessageData {
     private String messageFromBot;
     private String userName;
     private List<String> newUserNames;
+    private String leftUserName;
 
     public Long getChatId() {
         return chatId;
@@ -50,5 +51,17 @@ public class MessageData {
 
     public void setNewUserNames(List<String> newUserNames) {
         this.newUserNames = newUserNames;
+    }
+
+    public String getLeftUserName() {
+        return leftUserName;
+    }
+
+    public void setLeftUserName(String leftUserName) {
+        this.leftUserName = leftUserName;
+    }
+
+    public boolean isEmptyMessage() {
+        return messageToBot == null;
     }
 }

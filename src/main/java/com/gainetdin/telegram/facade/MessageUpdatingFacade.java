@@ -1,5 +1,6 @@
 package com.gainetdin.telegram.facade;
 
+import com.gainetdin.telegram.dao.ChatDao;
 import com.gainetdin.telegram.dao.ChatMemberDao;
 import com.gainetdin.telegram.entities.MessageData;
 import com.gainetdin.telegram.services.MessageBuilderService;
@@ -15,19 +16,23 @@ import java.util.List;
 @Component
 public class MessageUpdatingFacade {
 
+    private final ChatDao chatDao;
     private final ChatMemberDao chatMemberDao;
     private final MessageBuilderService messageBuilderService;
 
     @Autowired
-    public MessageUpdatingFacade(ChatMemberDao chatMemberDao, MessageBuilderService messageBuilderService) {
+    public MessageUpdatingFacade(ChatDao chatDao, ChatMemberDao chatMemberDao,
+                                 MessageBuilderService messageBuilderService) {
+        this.chatDao = chatDao;
         this.chatMemberDao = chatMemberDao;
         this.messageBuilderService = messageBuilderService;
     }
 
     public SendMessage updateChatBalance(Message message) {
         MessageData messageData = convertToMessageData(message);
+        chatDao.updateChat(messageData);
         chatMemberDao.updateChatMember(messageData);
-        chatMemberDao.createMessageToChat(messageData);
+        messageBuilderService.buildText(messageData);
         return messageBuilderService.buildMessage(messageData);
     }
 
@@ -36,18 +41,30 @@ public class MessageUpdatingFacade {
         messageData.setChatId(message.getChatId());
         messageData.setMessageToBot(message.getText());
         messageData.setUserName(message.getFrom().getUserName());
+        messageData.setLeftUserName(getLeftUserName(message));
+        messageData.setNewUserNames(getNewUserNamesList(message));
+        return messageData;
+    }
 
+    private List<String> getNewUserNamesList(Message message) {
         List<User> newUsersList = message.getNewChatMembers();
+        List<String> newUserNamesList = new ArrayList<>();
         if (!newUsersList.isEmpty()) {
-            List<String> newUserNamesList = new ArrayList<>();
             for (User newUser : newUsersList) {
                 if (!newUser.getIsBot()) {
                     newUserNamesList.add(newUser.getUserName());
                 }
             }
-            messageData.setNewUserNames(newUserNamesList);
         }
+        return newUserNamesList;
+    }
 
-        return messageData;
+    private String getLeftUserName(Message message) {
+        User leftUser = message.getLeftChatMember();
+        String leftUserName = null;
+        if(leftUser != null && !leftUser.getIsBot()) {
+            leftUserName = leftUser.getUserName();
+        }
+        return leftUserName;
     }
 }
