@@ -2,3 +2,6 @@ bot:
   name: ${DEBT_COUNTER_BOT_NAME}
   token: ${DEBT_COUNTER_BOT_TOKEN}
 
+logging:
+  level:
+    com.gainetdin.telegram: DEBUG
