@@ -23,6 +23,7 @@ class MessageParsingServiceImplTest {
                 "last purchase:\n" +
                 "190.48 pears\n" +
                 "105 bananas\n" +
+                "105 bananas\n" +
                 "half of sunflower oil 57.475\n" +
                 "230,55 chicken's meat\n"
         );
@@ -32,7 +33,7 @@ class MessageParsingServiceImplTest {
     void messageDataCanBeParsedToDifferentItems() {
         Map<String, BigDecimal> expectedMap = new HashMap<>();
         expectedMap.put("pears", new BigDecimal("190.48"));
-        expectedMap.put("bananas", new BigDecimal("105.00"));
+        expectedMap.put("bananas", new BigDecimal("210.00"));
         expectedMap.put("half of sunflower oil", new BigDecimal("57.48"));
         expectedMap.put("chicken's meat", new BigDecimal("230.55"));
 

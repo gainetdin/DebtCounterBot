@@ -40,8 +40,12 @@ public class MessageParsingServiceImpl implements MessageParsingService {
                 String priceValue = numberMatcher.group().replace(",", ".");
                 BigDecimal price = new BigDecimal(priceValue).setScale(2, RoundingMode.HALF_EVEN);
                 String item = numberMatcher.replaceAll(" ").trim();
-
-                items.put(item, price);
+                if (items.containsKey(item)) {
+                    items.put(item, items.get(item).add(price));
+                }
+                else {
+                    items.put(item, price);
+                }
             }
         }
         return items;
