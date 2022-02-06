@@ -1,7 +1,7 @@
-package com.gainetdin.telegram.services;
+package com.gainetdin.telegram.service;
 
-import com.gainetdin.telegram.entities.ItemsData;
-import com.gainetdin.telegram.entities.MessageData;
+import com.gainetdin.telegram.entity.ItemsData;
+import com.gainetdin.telegram.entity.MessageData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
