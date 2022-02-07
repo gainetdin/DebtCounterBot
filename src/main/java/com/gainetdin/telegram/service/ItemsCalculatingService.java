@@ -1,6 +1,6 @@
-package com.gainetdin.telegram.services;
+package com.gainetdin.telegram.service;
 
-import com.gainetdin.telegram.entities.ItemsData;
+import com.gainetdin.telegram.entity.ItemsData;
 
 import java.math.BigDecimal;
 

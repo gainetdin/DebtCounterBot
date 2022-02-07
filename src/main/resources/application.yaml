@@ -5,3 +5,15 @@ bot:
 logging:
   level:
     com.gainetdin.telegram: DEBUG
+
+spring:
+  datasource:
+    url: ${DEBT_COUNTER_DB_URL}
+    username: ${DEBT_COUNTER_DB_USERNAME}
+    password: ${DEBT_COUNTER_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  main:
+    banner-mode: off

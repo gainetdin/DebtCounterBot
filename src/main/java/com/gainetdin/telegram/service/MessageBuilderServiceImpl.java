@@ -1,9 +1,10 @@
-package com.gainetdin.telegram.services;
+package com.gainetdin.telegram.service;
 
 import com.gainetdin.telegram.dao.ChatDao;
-import com.gainetdin.telegram.entities.ChatEntity;
-import com.gainetdin.telegram.entities.MessageData;
+import com.gainetdin.telegram.entity.ChatEntity;
+import com.gainetdin.telegram.entity.MessageData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
@@ -61,7 +62,7 @@ public class MessageBuilderServiceImpl implements MessageBuilderService {
     }
 
     @Autowired
-    public MessageBuilderServiceImpl(ChatDao chatDao) {
+    public MessageBuilderServiceImpl(@Qualifier("chatDatabaseDao") ChatDao chatDao) {
         this.chatDao = chatDao;
     }
 }

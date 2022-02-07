@@ -1,4 +1,4 @@
-package com.gainetdin.telegram.entities;
+package com.gainetdin.telegram.entity;
 
 import org.springframework.stereotype.Component;
 import java.util.List;

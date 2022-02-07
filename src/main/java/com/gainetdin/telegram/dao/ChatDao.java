@@ -1,7 +1,7 @@
 package com.gainetdin.telegram.dao;
 
-import com.gainetdin.telegram.entities.ChatEntity;
-import com.gainetdin.telegram.entities.MessageData;
+import com.gainetdin.telegram.entity.ChatEntity;
+import com.gainetdin.telegram.entity.MessageData;
 
 public interface ChatDao {
 

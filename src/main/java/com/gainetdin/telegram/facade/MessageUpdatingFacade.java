@@ -2,9 +2,10 @@ package com.gainetdin.telegram.facade;
 
 import com.gainetdin.telegram.dao.ChatDao;
 import com.gainetdin.telegram.dao.ChatMemberDao;
-import com.gainetdin.telegram.entities.MessageData;
-import com.gainetdin.telegram.services.MessageBuilderService;
+import com.gainetdin.telegram.entity.MessageData;
+import com.gainetdin.telegram.service.MessageBuilderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -21,7 +22,8 @@ public class MessageUpdatingFacade {
     private final MessageBuilderService messageBuilderService;
 
     @Autowired
-    public MessageUpdatingFacade(ChatDao chatDao, ChatMemberDao chatMemberDao,
+    public MessageUpdatingFacade(@Qualifier("chatDatabaseDao") ChatDao chatDao,
+                                 @Qualifier("chatMemberDatabaseDao") ChatMemberDao chatMemberDao,
                                  MessageBuilderService messageBuilderService) {
         this.chatDao = chatDao;
         this.chatMemberDao = chatMemberDao;
